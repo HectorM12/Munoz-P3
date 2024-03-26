@@ -23,25 +23,38 @@
 
 const vue_app = Vue.createApp({
       // This automatically imports your movies.json file and puts it into
-      //   the variable: movies
-      created () {
-            fetch('movies.json').then(response => response.json()).then(json => {
+      // the variable: movies
+      created() {
+          fetch('movies.json')
+              .then(response => response.json())
+              .then(json => {
                   this.movies = json
-            })
+              })
       },
       data() {
-        return {
-            // This holds your movies.json data.
-            movies: [],
-            title: "IMDB + Hector's Top 8 Movies",
-            owner: "Hector",
-            github: "http://www.github.com/mjslee/is219lee-p3",
-         
-      }
-    },
+          return {
+              // This holds your movies.json data.
+              movies: [],
+              title: "IMDB + Hector's Top 8 Movies",
+              owner: "Hector",
+              github: "http://www.github.com/mjslee/is219lee-p3",
+          }
+      },
       methods: {
-            /* ADD FUNCTIONS/METHODS FOR STEP 7 HERE */
+          /* ADD FUNCTIONS/METHODS FOR STEP 7 HERE */
+          // Example method to add a new movie
+          addMovie(newMovie) {
+              this.movies.push(newMovie);
+          },
+          // Example method to remove a movie by index
+          removeMovie(index) {
+              this.movies.splice(index, 1);
+          },
+          // Example method to update a movie by index
+          updateMovie(index, updatedMovie) {
+              this.movies[index] = updatedMovie;
+          }
       }
-})
-
-vue_app.mount("#vue_app")
+  });
+  
+  vue_app.mount("#vue_app");
