@@ -21,39 +21,54 @@
 */
 
 const vue_app = Vue.createApp({
-      // This automatically imports your movies.json file and puts it into
-      // the variable: movies
-      created() {
-        fetch('movies.json')
-          .then((response) => response.json())
-          .then((json) => {
-            this.movies = json;
-          });
-      },
-      data() {
-        return {
-          // This holds your movies.json data.
-          movies: [],
-          title: "IMDB + Nelson's Top 8 Movies",
-          owner: "Nelson",
-          github: "https://github.com/nelsonnn11/Orellana-P3",
-        };
-      },
-      methods: {
-        getMonthText(dateArray) {
-          const months = [
-            'January', 'February', 'March', 'April', 'May', 'June',
-            'July', 'August', 'September', 'October', 'November', 'December'
-          ];
+  // This automatically imports your movies.json file and puts it into
+  // the variable: movies
+  created() {
+    fetch('movies.json')
+      .then((response) => response.json())
+      .then((json) => {
+        this.movies = json;
+      });
+  },
+  data() {
+    return {
+      // This holds movies.json data.
+      movies: [],
+      title: "IMDB + Hector's Top 8 Movies",
+      owner: "Hector",
+      github: "https://github.com/hectorm12/Munoz-P3",
+    };
+  },
+  methods: {
     
-          const month = months[dateArray[1] - 1];
-          const day = dateArray[2];
-          const year = dateArray[0];
-    
-          return `${month} ${day}, ${year}`;
-        },
-        // Other methods
-      },
-    });
-    
-    vue_app.mount("#vue_app");
+    getMonthText(dateArray) {
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+
+      const month = months[dateArray[1] - 1];
+      const day = dateArray[2];
+      const year = dateArray[0];
+
+      return `${month} ${day}, ${year}`;
+    },
+    like(index) {
+      // Implement logic to increment likes for the movie at the given index
+      this.movies[index].likes++;
+  },
+  dislike(index) {
+      // Implement logic to increment dislikes for the movie at the given index
+      this.movies[index].dislikes++;
+  },
+  posterClick(index) {
+    const movie = this.movies[index];
+    const numPosters = movie.posters.length;
+
+    // Increment posterindex for the movie at the given index
+    movie.posterindex = (movie.posterindex + 1) % numPosters;
+  }
+  },
+});
+
+vue_app.mount("#vue_app");
